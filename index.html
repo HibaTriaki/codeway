@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مدرسة Code Way - تعلم البايثون للأبطال</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Changa:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+            :root {
+              /* Couleurs inspirées de ton portfolio (Violet sombre et moderne) */
+              --primary-color: #5e1baf; /* Violet foncé principal */
+              --secondary-color: #66fe00; /* Jaune d'or pour les accents et étoiles */
+              --bg-color: #150952; /* Fond général de la page (Ultra Violet Sombre) */
+              --light-sky: #f3e5f5; /* Fond des boîtes d'explication (Violet très clair) */
+              --accent-teal: #00bfa5; /* Turquoise pour "Fait marquant" */
+              --accent-coral: rgb(189, 9, 156);
+            }
+
+            * {
+              box-sizing: border-box;
+              margin: 0;
+              padding: 0;
+              font-family: "Changa", sans-serif;
+            }
+
+            body {background:
+      radial-gradient(circle at top,#32118d 0%,#150952 40%,#090220 100%);
+              );
+              color: var(--dark-text);
+              overflow-x: hidden;
+              line-height: 1.6;
+            }
+
+            /* القائمة العلوية */
+            header {
+              background-color: var(--primary-color);
+              padding: 15px 30px;
+              position: sticky;
+              top: 0;
+              z-index: 100;
+              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            }
+
+            .logo {
+              color: white;
+              font-size: 28px;
+              font-weight: 800;
+              display: flex;
+              align-items: center;
+              gap: 10px;
+            }
+
+            .logo span {
+              color: var(--secondary-color);
+            }
+
+            nav {
+              display: flex;
+              gap: 15px;
+              overflow-x: auto;
+              max-width: 70%;
+            }
+
+            nav a {
+              color: white;
+              text-decoration: none;
+              padding: 8px 16px;
+              border-radius: 20px;
+              font-weight: 600;
+              transition: all 0.3s ease;
+              white-space: nowrap;
+            }
+
+            nav a:hover,
+            nav a.active {
+              background-color: var(--secondary-color);
+              color: var(--dark-text);
+              transform: scale(1.1);
+            }
+
+            /* القسم الترحيبي الرئيسي */
+            .hero {
+              background: linear-gradient(135deg, var(--primary-color), #8375e9);
+              color: white;
+              padding: 60px 20px;
+              text-align: center;
+              border-bottom-left-radius: 50px;
+              border-bottom-right-radius: 50px;
+              position: relative;
+              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .hero h1 {
+              font-size: 42px;
+              margin-bottom: 15px;
+              animation: bounce 2s infinite;
+            }
+
+            .hero p {
+              font-size: 20px;
+              opacity: 0.9;
+              margin-bottom: 30px;
+            }
+
+            /* شخصية روبي والمميزات السريعة */
+            .welcome-box {
+              background: white;
+              border-radius: 30px;
+              padding: 25px;
+              max-width: 700px;
+              margin: -20px auto 40px auto;
+              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+              display: flex;
+              align-items: center;
+              gap: 20px;
+              border: 3px dashed var(--primary-color);
+            }
+
+            .robot-img {
+              font-size: 60px;
+              animation: float 3s ease-in-out infinite;
+            }
+
+            /* بطاقات معلومات ممتعة وتحدي اليوم */
+            .fun-widgets {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 25px;
+              max-width: 1200px;
+              margin: 0 auto 50px auto;
+              padding: 0 20px;
+            }
+
+            .widget {
+              border-radius: 25px;
+              padding: 25px;
+              color: white;
+              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+              transition: transform 0.3s;
+            }
+
+            .widget:hover {
+              transform: translateY(-5px);
+            }
+
+            .did-you-know {
+              background-color: var(--accent-teal);
+            }
+            .daily-challenge {
+              background-color: var(--accent-coral);
+            }
+
+            .widget h3 {
+              font-size: 24px;
+              margin-bottom: 10px;
+              display: flex;
+              align-items: center;
+              gap: 10px;
+            }
+
+            /* حاوية الدروس والمحتوى */
+            .main-container {
+              max-width: 1200px;
+              margin: 0 auto;
+              padding: 0 20px 80px 20px;
+            }
+
+            .section-title {
+              text-align: center;
+              font-size: 32px;
+              margin: 40px 0 20px 0;
+              color: var(--primary-color);
+              position: relative;
+            }
+
+            .section-title::after {
+              content: "";
+              display: block;
+              width: 80px;
+              height: 5px;
+              background-color: var(--secondary-color);
+              margin: 8px auto 0 auto;
+              border-radius: 10px;
+            }
+
+            /* بطاقة الدرس */
+            .lesson-card {
+              background: white;
+              border-radius: 35px;
+              padding: 40px;
+              margin-bottom: 40px;
+              box-shadow: 0 10px 25px rgba(108, 92, 231, 0.05);
+              border: 2px solid #e2dcf7;
+              display: none;
+            }
+
+            .lesson-card.active-lesson {
+              display: block;
+              animation: slideIn 0.5s ease-out;
+            }
+
+            .lesson-header {
+              display: flex;
+              align-items: center;
+              gap: 15px;
+              font-size: 28px;
+              color: var(--primary-color);
+              margin-bottom: 25px;
+              border-bottom: 2px dashed #e2dcf7;
+              padding-bottom: 15px;
+            }
+
+            /* أسلوب الشرح الداخلي للبطاقات */
+            .explain-box {
+              background-color: var(--light-sky);
+              border-right: 6px solid #54a0ff;
+              padding: 20px;
+              border-radius: 15px;
+              margin-bottom: 25px;
+              font-size: 18px;
+            }
+
+            .code-block {
+              background-color: #2d2a4a;
+              color: #f8f8f2;
+              padding: 20px;
+              border-radius: 20px;
+              direction: ltr;
+              text-align: left;
+              font-family: "Courier New", Courier, monospace;
+              font-size: 18px;
+              margin-bottom: 15px;
+              position: relative;
+              box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .code-block::before {
+              content: "Python";
+              position: absolute;
+              top: 5px;
+              right: 15px;
+              font-size: 12px;
+              color: var(--secondary-color);
+              font-family: "Changa", sans-serif;
+            }
+
+            .terminal-block {
+              background-color: #1e1c33;
+              color: #5af78e;
+              padding: 15px 20px;
+              border-radius: 15px;
+              direction: ltr;
+              text-align: left;
+              font-family: monospace;
+              font-size: 16px;
+              margin-bottom: 25px;
+              border-left: 5px solid var(--accent-teal);
+            }
+
+            .terminal-block::before {
+              content: "شاشة النتيجة (Pictoblox Terminal) 🖥️";
+              display: block;
+              direction: rtl;
+              text-align: right;
+              color: #fff;
+              font-size: 13px;
+              margin-bottom: 5px;
+              font-family: "Changa", sans-serif;
+            }
+
+            /* تنبيهات الأخطاء والملخص */
+            .tips-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+              gap: 20px;
+              margin-top: 25px;
+            }
+
+            .tip-card {
+              padding: 20px;
+              border-radius: 20px;
+              font-size: 16px;
+            }
+
+            .error-tip {
+              background-color: #ffeaa7;
+              border-right: 5px solid #ff9f43;
+            }
+
+            .summary-tip {
+              background-color: #dff9fb;
+              border-right: 5px solid #00d2d3;
+            }
+
+            .tip-card h4 {
+              margin-bottom: 8px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+
+            /* أزرار التنقل السفلية */
+            .navigation-buttons {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-top: 40px;
+            }
+
+            .nav-btn {
+              background-color: var(--primary-color);
+              color: white;
+              border: none;
+              padding: 12px 25px;
+              font-size: 18px;
+              font-weight: 600;
+              border-radius: 25px;
+              cursor: pointer;
+              transition: all 0.3s;
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+            }
+
+            .nav-btn:hover {
+              background-color: var(--secondary-color);
+              color: var(--dark-text);
+              transform: scale(1.05);
+            }
+
+            .nav-btn:disabled {
+              background-color: #d2ccf4;
+              cursor: not-allowed;
+              transform: none;
+              box-shadow: none;
+              color: #9e96d3;
+            }
+
+            @keyframes bounce {
+              0%,
+              100% {
+                transform: translateY(0);
+              }
+              50% {
+                transform: translateY(-10px);
+              }
+            }
+
+            @keyframes float {
+              0%,
+              100% {
+                transform: translateY(0) rotate(0deg);
+              }
+              50% {
+                transform: translateY(-8px) rotate(3deg);
+              }
+            }
+
+            @keyframes slideIn {
+              from {
+                opacity: 0;
+                transform: translateY(20px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+
+            /* ===== ETOILES ===== */
+            .stars,
+            .stars2,
+            .stars3 {
+              position: fixed;
+              top: 0;
+              left: 0;
+
+              width: 100%;
+              height: 100%;
+
+              pointer-events: none;
+
+              z-index: -1;
+            }
+
+            /* Etoiles couche 1 */
+
+            .stars {
+              background-image:
+                radial-gradient(2px 2px at 50px 80px, white, transparent),
+                radial-gradient(2px 2px at 200px 250px, white, transparent),
+                radial-gradient(2px 2px at 500px 150px, white, transparent),
+                radial-gradient(2px 2px at 900px 100px, white, transparent),
+                radial-gradient(2px 2px at 1200px 300px, white, transparent);
+
+              animation: sparkle 4s infinite alternate;
+            }
+
+            /* Etoiles couche 2 */
+
+            .stars2 {
+              background-image:
+                radial-gradient(3px 3px at 150px 200px, #66fe00, transparent),
+                radial-gradient(3px 3px at 700px 100px, #66fe00, transparent),
+                radial-gradient(3px 3px at 1000px 400px, #66fe00, transparent);
+
+              animation: sparkle 6s infinite alternate;
+            }
+
+            /* Etoiles couche 3 */
+
+            .stars3 {
+              background-image:
+                radial-gradient(1px 1px at 300px 100px, white, transparent),
+                radial-gradient(1px 1px at 600px 350px, white, transparent),
+                radial-gradient(1px 1px at 1100px 250px, white, transparent);
+
+              animation: sparkle 8s infinite alternate;
+            }
+            .stars {
+              background-image:
+                radial-gradient(2px 2px at 20px 30px, white, transparent),
+                radial-gradient(2px 2px at 200px 120px, white, transparent),
+                radial-gradient(2px 2px at 350px 250px, white, transparent),
+                radial-gradient(2px 2px at 500px 90px, white, transparent),
+                radial-gradient(2px 2px at 800px 300px, white, transparent),
+                radial-gradient(2px 2px at 1000px 180px, white, transparent);
+            }
+
+            .stars2 {
+              background-image:
+                radial-gradient(3px 3px at 150px 200px, #66fe00, transparent),
+                radial-gradient(3px 3px at 700px 100px, #66fe00, transparent),
+                radial-gradient(3px 3px at 950px 400px, #66fe00, transparent);
+            }
+
+            .stars3 {
+              background-image:
+                radial-gradient(1px 1px at 300px 150px, white, transparent),
+                radial-gradient(1px 1px at 600px 350px, white, transparent),
+                radial-gradient(1px 1px at 1200px 250px, white, transparent);
+            }
+
+            /* ===== METEORES ===== */
+
+            .meteor {
+              position: fixed;
+              width: 3px;
+              height: 120px;
+              background: linear-gradient(white, transparent);
+              transform: rotate(45deg);
+              animation: meteor-fall 6s linear infinite;
+              z-index: -1;
+            }
+
+            .meteor:nth-of-type(1) {
+              top: -100px;
+              left: 20%;
+              animation-delay: 0s;
+            }
+
+            .meteor:nth-of-type(2) {
+              top: -100px;
+              left: 60%;
+              animation-delay: 2s;
+            }
+
+            .meteor:nth-of-type(3) {
+              top: -100px;
+              left: 85%;
+              animation-delay: 4s;
+            }
+
+            @keyframes sparkle {
+              0% {
+                opacity: 0.3;
+                transform: translateY(0px);
+              }
+
+              50% {
+                opacity: 1;
+              }
+
+              100% {
+                opacity: 0.4;
+                transform: translateY(-15px);
+              }
+            }
+
+            @keyframes meteor-fall {
+              0% {
+                transform: translateY(0) translateX(0) rotate(45deg);
+                opacity: 1;
+              }
+
+              100% {
+                transform: translateY(1200px) translateX(500px) rotate(45deg);
+                opacity: 0;
+              }
+            }
+
+            @media (max-width: 768px) {
+              header {
+                flex-direction: column;
+                gap: 15px;
+              }
+              nav {
+                max-width: 100%;
+              }
+              .hero h1 {
+                font-size: 30px;
+              }
+              .welcome-box {
+                flex-direction: column;
+                text-align: center;
+              }
+              .lesson-card {
+                padding: 20px;
+              }
+            }
+    </style>
+  </head>
+
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
+
+  <div class="meteor"></div>
+  <div class="meteor"></div>
+  <div class="meteor"></div>
+
+  <body>
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
+    <div class="meteor"></div>
+    <div class="meteor"></div>
+    <div class="meteor"></div>
+    <header>
+      <div class="logo">
+        <i class="fa-solid fa-code-branch"></i> مدرسة <span>Code Way</span>
+      </div>
+      <nav id="nav-links"></nav>
+    </header>
+
+    <section class="hero">
+      <h1>مرحباً بك يا بطل البرمجة! 🚀</h1>
+      <p>
+        مرجعك السريع والممتع لمراجعة دروس لغة بايثون (Python) بعد الحصة في
+        مدرستنا الرائعة!
+      </p>
+    </section>
+
+    <div class="welcome-box">
+      <div class="robot-img">🤖</div>
+      <div>
+        <h2>أنا صديقك الروبوت "روبي"!</h2>
+        <p>
+          سأرافقك خطوة بخطوة لتنظيم أفكارك وتذكر كل ما تعلمناه. اختر الدرس من
+          الأعلى أو تنقل بالأزرار في الأسفل لتشعر وكأنك تقرأ قصة شيقة!
+        </p>
+      </div>
+    </div>
+
+    <div class="fun-widgets">
+      <div class="widget did-you-know">
+        <h3><i class="fa-solid fa-lightbulb"></i> هل تعلم؟</h3>
+        <p id="fact-text">
+          لغة بايثون (Python) لم تُسمَّ على اسم أفعى البايثون! بل سُميت تيمناً
+          ببرنامج تلفزيوني كوميدي قديم كان يحبه مخترع اللغة.
+        </p>
+      </div>
+      <div class="widget daily-challenge">
+        <h3><i class="fa-solid fa-trophy"></i> تحدي اليوم</h3>
+        <p id="challenge-text">
+          جرّب إنشاء متغير يحمل اسم مدرستك "Code Way" ثم قم بطباعته باستخدام أمر
+          الطباعة المتكرر!
+        </p>
+      </div>
+    </div>
+
+    <main class="main-container">
+      <h2 class="section-title">مراجعة الدروس الأساسية</h2>
+
+      <div id="lessons-wrapper"></div>
+
+      <div class="navigation-buttons">
+        <button class="nav-btn" id="prev-btn" onclick="changeLesson(-1)">
+          <i class="fa-solid fa-arrow-right"></i> الدرس السابق
+        </button>
+        <button class="nav-btn" id="next-btn" onclick="changeLesson(1)">
+          الدرس التالي <i class="fa-solid fa-arrow-left"></i>
+        </button>
+      </div>
+    </main>
+
+    <script>
+      const lessonsData = [
+        {
+          title: "1. ما هي البرمجة؟",
+          explain:
+            "<b>البرمجة (Programming):</b> هي الطريقة التي نتحدث بها مع الكمبيوتر لنعطيه أوامر ذكية ينفذها لنا.",
+          example:
+            'تخيل أنك تدرب كلباً صغيراً؛ عندما تقول له "اجلس" فإنه يجلس. البرمجة هي كتابة الكلمات البرمجية ليفهمها الروبوت أو الكمبيوتر وينفذها!',
+          code: '# لنطلب من الكمبيوتر أن يرحب بنا بالبرمجة\nprint("Hello Code Way!")',
+          terminal: "Hello Code Way!",
+          error:
+            "الكمبيوتر حساس جداً! إذا كتبت P capital في كلمة print فلن يفهمك.",
+          summary:
+            "البرمجة = لغة حوار بيننا وبين الآلة لإنشاء الألعاب والمواقع.",
+        },
+        {
+          title: "2. ما هي لغة بايثون (Python)؟",
+          explain:
+            "<b>بايثون (Python):</b> هي واحدة من أشهر وأسهل لغات البرمجة في العالم، وهي تشبه اللغة الإنجليزية البسيطة جداً.",
+          example:
+            "تخيل أنك تتحدث مع صديق ذكي يفهم الإشارات السريعة، بايثون تمكننا من بناء تطبيقات ومسابقات في Pictoblox بأسطر قليلة جداً.",
+          code: 'if 5 > 3:\n    print("بايثون سهلة وممتعة!")',
+          terminal: "بايثون سهلة وممتعة!",
+          error:
+            "تجنب نسيان النقطتين (:) في نهاية الشروط وإلا ستحصل على خطأ في التشغيل.",
+          summary:
+            "بايثون لغة قوية وسهلة الفهم وتستخدمها أكبر الشركات مثل يوتيوب وجوجل.",
+        },
+        {
+          title: "3. المتغيرات (Variables)",
+          explain:
+            "<b>المتغير (Variable):</b> هو مكان سري ونظيف نقوم بحجزه وتخزين المعلومات بداخله في ذاكرة الكمبيوتر لنستخدمها لاحقاً.",
+          example:
+            'تخيل أن لديك صندوق ألعاب كرتوني، قمت بإلصاق ورقة عليه وكتبت عليها "ألعابي المفضلة"، ووضعت بداخله سيارة براميل. الصندوق هو المتغير، والاسم هو عنوانه، والسيارة هي القيمة السحرية بالداخل!',
+          code: 'school_name = "Code Way"\nprint(school_name)',
+          terminal: "Code Way",
+          error:
+            "لا تبدأ اسم المتغير برقم أبداً! مثل (1name)، هذا يجعل بايثون تغضب وتتوقف.",
+          summary:
+            "نستعمل علامة تساوي (=) واحدة لتخزين أي قيمة داخل المتغير البرمجي.",
+        },
+        {
+          title: "4. أنواع البيانات (Data Types)",
+          explain:
+            "الكمبيوتر ذكي ويحب تصنيف الأشياء! البيانات التي نضعها في المتغيرات لها أنواع مختلفة.",
+          example:
+            "مثلما نضع العصير في الكوب، والألعاب في الصندوق، والأوراق في المحفظة، الكمبيوتر يقسم البيانات إلى: نصوص، وأرقام صحيحة، وأرقام عشرية، وقيم منطقية.",
+          code: 'age = 9               # عدد صحيح (Integer)\nweight = 27.5         # عدد عشري (Float)\nname = "Hiba"         # نص (String)\nis_happy = True       # قيمة منطقية (Boolean)',
+          terminal: "# تم حفظ البيانات بنجاح داخل الذاكرة بدون أخطاء!",
+          error:
+            "الرقم الصحيح لا يحتوي على نقطة، بينما الرقم العشري يجب وضع نقطة (.) فيه وليس فاصلة (,).",
+          summary:
+            'الأحرف والنصوص توضع دائماً بين علامتي تنصيص " " لتمييزها عن الأرقام.',
+        },
+        {
+          title: "5. القوائم (Lists)",
+          explain:
+            "<b>القائمة (List):</b> هي صندوق واحد كبير ومقسم يسع الكثير من العناصر المرتبة والمحفوظة معاً.",
+          example:
+            "تخيل مقلمة أدواتك المدرسية الرائعة، تحتوي على قلم رصاص، ممحاة، ومسطرة. المقلمة كلها قائمة واحدة تجمع أشياءك المفضلة.",
+          code: 'my_tools = ["قلم", "ممحاة", "مسطرة"]\nprint(my_tools[0])  # طباعة العنصر الأول',
+          terminal: "قلم",
+          error:
+            "الكمبيوتر يبدأ العد دائماً من الرقم صفر (0) وليس واحد (1)! تذكر هذا دائماً.",
+          summary:
+            "نستخدم الأقواس المربعة [ ] لإنشاء القوائم ونفصل بين العناصر بفاصلة برمجية.",
+        },
+        {
+          title: "6. الجداول والمصفوفات (Arrays)",
+          explain:
+            "<b>المصفوفة البسيطة (Array):</b> تشبه القائمة تماماً، لكنها مخصصة لحفظ أشياء من نفس النوع (مثلاً قائمة كلها أرقام فقط).",
+          example:
+            "مثل علبة البيض، مرتبة وكلها تحتوي على بيض فقط من نفس الحجم والنوع لتسهيل الحساب والترتيب.",
+          code: "scores = [10, 9, 8, 10]\nprint(scores)",
+          terminal: "[10, 9, 8, 10]",
+          error:
+            "محاولة خلط نصوص طويلة مع أرقام في مصفوفة مخصصة للحسابات قد تسبب بطء البرامج.",
+          summary:
+            "المصفوفات تجعل برامج الألعاب سريعة جداً عند التعامل مع نقاط اللاعبين.",
+        },
+        {
+          title: "7. الشروط (Conditions)",
+          explain:
+            "<b>الشروط (Conditions):</b> هي جعل الكمبيوتر يتخذ قراراً ذكياً بمفرده بناءً على حدوث شيء معين باستخدام القاعدة الذهبية (إذا / if).",
+          example:
+            'تخيل أن والدتك قالت لك: "إذا هطل المطر بالخارج، خذ المظلة معك". هذا هو الشرط تماماً!',
+          code: 'points = 10\nif points == 10:\n    print("أنت بطل خارق في مدرسة Code Way!")',
+          terminal: "أنت بطل خارق في مدرسة Code Way!",
+          error:
+            "عند المقارنة والتحقق من التساوي نكتب علامة تساوي مرتين (==) وليس مرة واحدة.",
+          summary:
+            "نستخدم if للشرط، و else للأشياء التي تحدث إذا لم يتحقق هذا الشرط.",
+        },
+        {
+          title: "8. الحلقات التكرارية (Loops)",
+          explain:
+            "<b>الحلقة (Loop):</b> هي قوة سحرية تطلب من الكمبيوتر تكرار أمر معين لمرات كثيرة دون تعب وبسرعة البرق.",
+          example:
+            "عندما تلعب بنط الحبل وتعد من 1 إلى 5، أنت تكرر حركة النط خمس مرات متتالية.",
+          code: 'for x in range(3):\n    print("بايثون رائعة! 🌟")',
+          terminal: "بايثون رائعة! 🌟\nبايثون رائعة! 🌟\nبايثون رائعة! 🌟",
+          error:
+            "احذر من الحلقات اللانهائية التي لا تتوقف أبداً، فقد تجعل المتصفح أو البرنامج يتجمد ويحتاج إغلاق.",
+          summary:
+            "تكرار الكود يحمينا من إعادة كتابة نفس الأسطر مئات المرات يدوياً.",
+        },
+        {
+          title: "9. الدوال (Functions)",
+          explain:
+            "<b>الدالة (Function):</b> هي عبارة عن مصنع صغير أو تعويذة سحرية نجهزها ونعطيها اسماً، وعندما نناديها تقوم بعملها فوراً.",
+          example:
+            "زر جرس الباب في منزلك! لقد تم تصنيعه وتركيبه مرة واحدة، لكن كلما ضغط عليه ضيف، يقوم بمهتمه ويصدر صوتاً رائعاً.",
+          code: 'def welcome_hero():\n    print("أهلاً بك في مراجعة مدرسة Code Way")\n\nwelcome_hero() # هنا قمنا بضغط الزر ومناداة الدالة',
+          terminal: "أهلاً بك في مراجعة مدرسة Code Way",
+          error:
+            "يجب تعريف الدالة أولاً باستخدام كلمة def قبل أن تبدأ بمناداتها في الأسفل.",
+          summary:
+            "الدوال تجمع الأكواد المتشابهة لتجعل مشروعك في Pictoblox نظيفاً ومنظماً.",
+        },
+        {
+          title: "10. تمارين صغيرة وتحديات",
+          explain:
+            "حان وقت اختبار القوة البرمجية الآن يا بطل بعد أن راجعنا كل الدروس الرائعة مع الروبوت روبي!",
+          example:
+            "تخيل أنك تبني كود الحماية الخاص بلعبتك المفضلة في مدرسة Code Way وتريد التحقق من أن التلميذ يدخل كلمة السر الصحيحة للدخول.",
+          code: 'password = "codeway123"\nif password == "codeway123":\n    print("تم فتح القفل! افتح اللعبة 🎮")\nelse:\n    print("كلمة المرور خاطئة، حاول مجدداً ❌")',
+          terminal: "تم فتح القفل! افتح اللعبة 🎮",
+          error:
+            "تأكد من كتابة الحروف والرموز بدقة شديدة حتى ينجح معك التحدي البرمجي بالكامل.",
+          summary:
+            "المبرمج البطل يتدرب يومياً ويجرب كتابة الأكواد بيده في منصة الاختبار الخاصة به.",
+        },
+      ];
+
+      let currentLessonIndex = 0;
+      const navLinksContainer = document.getElementById("nav-links");
+      const lessonsWrapper = document.getElementById("lessons-wrapper");
+
+      lessonsData.forEach((lesson, index) => {
+        const link = document.createElement("a");
+        link.innerText =
+          lesson.title.split(".")[0] === "10"
+            ? "تمارين 🎉"
+            : lesson.title.split(" ")[1];
+        link.href = "#";
+        link.setAttribute("id", `nav-link-${index}`);
+        link.onclick = (e) => {
+          e.preventDefault();
+          showLesson(index);
+        };
+        navLinksContainer.appendChild(link);
+
+        const card = document.createElement("div");
+        card.className = `lesson-card ${index === 0 ? "active-lesson" : ""}`;
+        card.setAttribute("id", `lesson-card-${index}`);
+
+        card.innerHTML = `
+                <div class="lesson-header">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>${lesson.title}</span>
+                </div>
+                
+                <div class="explain-box">
+                    <p><strong>💡 الشرح البسيط:</strong> ${lesson.explain}</p>
+                </div>
+
+                <p style="margin-bottom: 15px; font-size: 17px;"><strong>🏠 مثال من الحياة اليومية:</strong> ${lesson.example}</p>
+
+                <div class="code-block">${lesson.code.replace(/\n/g, "<br>").replace(/ /g, "&nbsp;")}</div>
+                
+                <div class="terminal-block">${lesson.terminal.replace(/\n/g, "<br>")}</div>
+
+                <div class="tips-grid">
+                    <div class="tip-card error-tip">
+                        <h4><i class="fa-solid fa-triangle-exclamation"></i> خطأ شائع احذره!</h4>
+                        <p>${lesson.error}</p>
+                    </div>
+                    <div class="tip-card summary-tip">
+                        <h4><i class="fa-solid fa-star"></i> ملخص سريع</h4>
+                        <p>${lesson.summary}</p>
+                    </div>
+                </div>
+            `;
+        lessonsWrapper.appendChild(card);
+      });
+
+      function showLesson(index) {
+        document
+          .getElementById(`lesson-card-${currentLessonIndex}`)
+          .classList.remove("active-lesson");
+        document
+          .getElementById(`nav-link-${currentLessonIndex}`)
+          .classList.remove("active");
+
+        currentLessonIndex = index;
+
+        document
+          .getElementById(`lesson-card-${currentLessonIndex}`)
+          .classList.add("active-lesson");
+        document
+          .getElementById(`nav-link-${currentLessonIndex}`)
+          .classList.add("active");
+
+        document.getElementById("prev-btn").disabled = currentLessonIndex === 0;
+        document.getElementById("next-btn").disabled =
+          currentLessonIndex === lessonsData.length - 1;
+
+        document
+          .querySelector(".section-title")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      function changeLesson(direction) {
+        let targetIndex = currentLessonIndex + direction;
+        if (targetIndex >= 0 && targetIndex < lessonsData.length) {
+          showLesson(targetIndex);
+        }
+      }
+
+      showLesson(0);
+    </script>
+  </body>
+</html>
